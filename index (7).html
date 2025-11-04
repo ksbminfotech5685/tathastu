@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TATHASTU — Where The Divine Says 'YES' To You</title>
+    <style>
+        :root {
+            --royal-orange: #FF6B35;
+            --deep-gold: #FFD23F;
+            --rich-purple: #A855F7;
+            --dark-purple: #7C3AED;
+            --soft-cream: #FFF8E7;
+            --deep-burgundy: #DC2626;
+            --warm-amber: #F59E0B;
+            --mystic-teal: #06B6D4;
+            --dark-navy: #1E1B4B;
+            --light-gold: #FDE68A;
+            --shadow-dark: rgba(168, 85, 247, 0.4);
+            --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F59E0B 50%, #FFD23F 100%);
+            --gradient-secondary: linear-gradient(135deg, #A855F7 0%, #7C3AED 100%);
+            --gradient-hero: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4C1D95 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: var(--gradient-hero);
+            color: var(--soft-cream);
+            overflow-x: hidden;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(30, 27, 75, 0.95) 0%, 
+                rgba(49, 46, 129, 0.9) 50%, 
+                rgba(76, 29, 149, 0.85) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Animated Background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(168, 85, 247, 0.03) 50%, transparent 100%),
+                radial-gradient(ellipse at top left, rgba(255, 107, 53, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(245, 158, 11, 0.04) 0%, transparent 50%);
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 210, 63, 0.6);
+            border-radius: 50%;
+            animation: twinkle 5s infinite ease-in-out;
+            box-shadow: 0 0 3px rgba(255, 210, 63, 0.4);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.3); box-shadow: 0 0 5px rgba(255, 210, 63, 0.5); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(30, 27, 75, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.15);
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: 0 6px 30px var(--shadow-dark);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 20px rgba(255, 210, 63, 0.5));
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 210, 63, 0.5)); }
+            50% { filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.8)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--royal-orange), var(--deep-gold));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--royal-orange);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            animation: heroGlow 4s ease-in-out infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            filter: drop-shadow(0 0 40px rgba(255, 210, 63, 0.6));
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 40px rgba(255, 210, 63, 0.6));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 60px rgba(255, 107, 53, 0.9));
+                transform: scale(1.02);
+            }
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--light-gold);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--soft-cream);
+            opacity: 0.9;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .feature-tag {
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(255, 107, 53, 0.2));
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 210, 63, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-tag:hover::before {
+            left: 100%;
+        }
+
+        .feature-tag:hover {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(255, 107, 53, 0.4));
+            border-color: var(--deep-gold);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.5);
+        }
+
+        /* CTA Buttons */
+        .cta-primary, .cta-secondary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            margin: 1rem 0.5rem;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary {
+            background: var(--gradient-primary);
+            color: var(--dark-navy);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.6);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.8);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--royal-orange);
+            border: 2px solid var(--royal-orange);
+        }
+
+        .cta-secondary:hover {
+            background: var(--royal-orange);
+            color: var(--dark-navy);
+            transform: translateY(-5px);
+        }
+
+        /* Section Styles */
+        section {
+            position: relative;
+            padding: 6rem 5%;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 0 30px rgba(255, 210, 63, 0.4));
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--light-gold);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Why Tathastu Section */
+        .why-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .why-card {
+            background: rgba(30, 27, 75, 0.6);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .why-card:hover::before {
+            left: 100%;
+        }
+
+        .why-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--royal-orange);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(30, 27, 75, 0.8);
+        }
+
+        .why-card h3 {
+            font-size: 1.8rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .why-card p {
+            color: var(--soft-cream);
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            color: var(--deep-gold);
+            margin: 2rem 0 1rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--soft-cream);
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--warm-amber);
+            padding: 2rem;
+            border-left: 4px solid var(--royal-orange);
+            margin: 2rem 0;
+            background: rgba(30, 27, 75, 0.5);
+            border-radius: 10px;
+        }
+
+        /* Services Section */
+        .services-tabs {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tabs-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: rgba(107, 44, 145, 0.3);
+            border: 2px solid transparent;
+            color: var(--soft-cream);
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: linear-gradient(135deg, var(--royal-orange), var(--warm-amber));
+            color: var(--dark-navy);
+            border-color: var(--deep-gold);
+            transform: translateY(-3px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .service-card {
+            background: rgba(30, 27, 75, 0.5);
+            border: 1px solid rgba(255, 107, 53, 0.25);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--warm-amber);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            background: rgba(30, 27, 75, 0.7);
+        }
+
+        .service-card h3 {
+            font-size: 2.2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .service-card li {
+            padding: 0.7rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--soft-cream);
+        }
+
+        .service-card li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(30, 27, 75, 0.6);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            font-style: italic;
+            color: var(--soft-cream);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 27, 75, 0.8);
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: linear-gradient(135deg, rgba(107, 44, 145, 0.4), rgba(27, 94, 126, 0.4));
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .scarcity-badge {
+            display: inline-block;
+            background: var(--deep-burgundy);
+            color: var(--soft-cream);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* FAQs */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(30, 27, 75, 0.5);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--deep-gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: var(--royal-orange);
+            font-size: 1.5rem;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 30, 46, 0.95);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--royal-orange);
+        }
+
+        .footer-cta {
+            margin: 2rem 0;
+        }
+
+        .copyright {
+            color: var(--light-gold);
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 30, 46, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .tabs-header {
+                flex-direction: column;
+            }
+
+            .cta-primary, .cta-secondary {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg" id="cosmic-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">TATHASTU</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#why">Why Tathastu</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#remedies">Remedies & Vastu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Results</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#aartis">Aartis/Chalisa</a></li>
+                <li><a href="#booking">Book Session</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>TATHASTU</h1>
+            <h2>Where The Divine Says 'YES' To You</h2>
+            <p>✨ Your karma, your light, your destiny — unlocked with wisdom &amp; cosmic truth.</p>
+            <p>You didn't land here randomly. When your soul is ready, the path appears.</p>
+            
+            <div class="hero-features">
+                <span class="feature-tag">🎯 One-to-one Transforming Sessions</span>
+                <span class="feature-tag">💠 Science-Aligned Astrology</span>
+                <span class="feature-tag">🕉️ Ancient Vedic Wisdom</span>
+                <span class="feature-tag">🪔 Results-Driven Guidance</span>
+            </div>
+
+            <p style="margin-top: 2rem; font-size: 1.3rem; font-weight: 600;">
+                Here, clarity is sacred. Your destiny is personal.<br>
+                Every reading is divine engineering — designed for YOU.
+            </p>
+
+            <div style="margin-top: 2rem;">
+                <span class="feature-tag">✅ Limited Access</span>
+                <span class="feature-tag">✅ High-Intimacy Guidance</span>
+                <span class="feature-tag">✅ Real-Life Practical Remedies</span>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <a href="#booking" class="cta-primary">Unlock My Destiny →</a>
+                <a href="#why" class="cta-secondary">Begin Your Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Tathastu Works -->
+    <section id="why">
+        <div class="section-header scroll-animate">
+            <h2>🕉️ WHY TATHASTU WORKS</h2>
+            <p>Because this is not prediction. This is awakening, alignment &amp; activation.</p>
+        </div>
+
+        <div class="why-cards">
+            <div class="why-card scroll-animate">
+                <h3>Deep Vedic Jyotish Analysis</h3>
+                <p>Complete decoding of your birth chart with precision and authenticity. We analyze every planetary position and aspect to reveal your soul's journey.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>Lal Kitab Logic &amp; Karmic Precision</h3>
+                <p>Rapid, practical corrections tailored to your unique karmic patterns. Simple remedies that work in real life without complexity or expense.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>Energy Reading &amp; Psychological Decoding</h3>
+                <p>Beyond astrology — we read your energy field, decode behavioral patterns, and align your consciousness with your destiny path.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>Divine Intuitive Guidance</h3>
+                <p>Channeling cosmic wisdom to provide clarity on life's most challenging questions. Your answers come from a place of truth and divine connection.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>Practical Lifestyle Remedies</h3>
+                <p>No rituals. No show-off spirituality. Only results, awareness, and evolution through simple daily practices aligned with cosmic law.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>Ethical &amp; No-Fear Spirituality</h3>
+                <p>We believe in empowerment, not fear. Every answer is truth. Every remedy is real. No superstition, only transformation.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <div class="quote scroll-animate">
+                "We cover each and every aspect of your life… with simple, no-cost remedies"
+            </div>
+            <a href="#services" class="cta-primary">Know How The Session Works →</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header scroll-animate">
+            <h2>☀️ ABOUT TATHASTU</h2>
+            <p>A place where divine laws meet real-world clarity</p>
+        </div>
+
+        <div class="about-content">
+            <div class="quote scroll-animate">
+                "Tathastu" — means Let it be granted.<br>
+                The sound the universe speaks when your intention aligns with your destiny.
+            </div>
+
+            <p class="scroll-animate">
+                <strong style="color: var(--deep-gold); font-size: 1.3rem;">"God has only one word for any prayer — TATHASTU"</strong>
+            </p>
+
+            <p class="scroll-animate">
+                Serving for the last 20 years, we believe in the Law of Attraction rooted in Vedic truth — 
+                Your thoughts create your time, your life, your future.
+            </p>
+
+            <h3 class="scroll-animate">Tathastu is a sanctuary where:</h3>
+            <div class="hero-features" style="margin: 2rem auto;">
+                <span class="feature-tag">🟣 Astrology becomes clarity</span>
+                <span class="feature-tag">🟢 Remedies become results</span>
+                <span class="feature-tag">🔵 Guidance becomes transformation</span>
+            </div>
+
+            <h3 class="scroll-animate">We are known for:</h3>
+            <div class="service-card scroll-animate">
+                <ul>
+                    <li>Honest, detailed Kundli decoding</li>
+                    <li>No-cost or minimal-cost remedies</li>
+                    <li>Personalized life blueprint</li>
+                    <li>Practical guidance, no superstition</li>
+                    <li>One person at a time — complete privacy</li>
+                </ul>
+            </div>
+
+            <div class="quote scroll-animate">
+                "We analyse each Kundli deeply &amp; comprehensively… results through very simple remedies"
+            </div>
+
+            <a href="#booking" class="cta-primary">Book Your Private Session →</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-header scroll-animate">
+            <h2>🪬 OUR SERVICES</h2>
+            <p>Choose your path to transformation</p>
+        </div>
+
+        <div class="services-tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="openTab(event, 'kundli')">Kundli Life Blueprint</button>
+                <button class="tab-btn" onclick="openTab(event, 'lalkitab')">Lal Kitab Remedies</button>
+                <button class="tab-btn" onclick="openTab(event, 'vastu')">Vastu Alignment</button>
+                <button class="tab-btn" onclick="openTab(event, 'numerology')">Numerology</button>
+                <button class="tab-btn" onclick="openTab(event, 'relationship')">Relationship Path</button>
+                <button class="tab-btn" onclick="openTab(event, 'career')">Career &amp; Money</button>
+                <button class="tab-btn" onclick="openTab(event, 'gemstones')">Gemstones</button>
+            </div>
+
+            <div id="kundli" class="tab-content active">
+                <div class="service-card">
+                    <h3>🛕 Kundli Life Blueprint (Signature Service)</h3>
+                    <p>Complete past, present, future — Your soul lessons &amp; karmic map</p>
+                    <ul>
+                        <li>Deep decode of your entire birth chart</li>
+                        <li>Timeline windows and planetary periods</li>
+                        <li>Karmic lessons and soul purpose</li>
+                        <li>Remedies &amp; breakthrough strategies</li>
+                        <li>Personalized action plan you can execute now</li>
+                    </ul>
+                    <div class="quote">"We cover all aspects of your life… privacy ensured in one-to-one sessions"</div>
+                    <a href="#booking" class="cta-primary">Reserve My Blueprint →</a>
+                </div>
+            </div>
+
+            <div id="lalkitab" class="tab-content">
+                <div class="service-card">
+                    <h3>📿 Lal Kitab Divine Remedial System</h3>
+                    <p>Real-world karmic cures. Powerful, fast, uncomplicated.</p>
+                    <ul>
+                        <li>Simple, inexpensive remedies tailored to your chart</li>
+                        <li>Globally trusted for rapid results</li>
+                        <li>No complicated rituals or expensive materials</li>
+                        <li>Practical solutions for modern life</li>
+                        <li>Targeted to actual afflictions in your horoscope</li>
+                    </ul>
+                    <div class="quote">"Simple, inexpensive remedies… widely effective"</div>
+                    <a href="#booking" class="cta-primary">Start Lal Kitab Remedies →</a>
+                </div>
+            </div>
+
+            <div id="vastu" class="tab-content">
+                <div class="service-card">
+                    <h3>🏛️ Vastu Karma-Alignment</h3>
+                    <p>Not architecture — Energy direction alignment.</p>
+                    <ul>
+                        <li>Directional energy corrections without breaking walls</li>
+                        <li>Practical Vastu that protects peace, growth, and profits</li>
+                        <li>Home, office, or project clearance</li>
+                        <li>Behavioral anchoring and subtle cures</li>
+                        <li>Get Vastu without breaking walls &amp; budgets</li>
+                    </ul>
+                    <a href="#booking" class="cta-primary">Book Vastu Clearance →</a>
+                </div>
+            </div>
+
+            <div id="numerology" class="tab-content">
+                <div class="service-card">
+                    <h3>🔢 Numerology Name Balancing</h3>
+                    <p>Soul vibration correction for complete life harmony</p>
+                    <ul>
+                        <li>Career name optimization</li>
+                        <li>Marriage and relationship compatibility</li>
+                        <li>Children's name selection</li>
+                        <li>Business name correction</li>
+                        <li>Signature modification</li>
+                        <li>Vehicle / house number guidance</li>
+                    </ul>
+                    <a href="#booking" class="cta-primary">Correct My Name Vibration →</a>
+                </div>
+            </div>
+
+            <div id="relationship" class="tab-content">
+                <div class="service-card">
+                    <h3>💕 Relationship / Marriage Path</h3>
+                    <p>Matching beyond gun milan — Deep compatibility analysis</p>
+                    <ul>
+                        <li>Emotional compatibility and psychological patterns</li>
+                        <li>Long-term stability reading</li>
+                        <li>Family integration dynamics</li>
+                        <li>Timeline predictions for marriage and children</li>
+                        <li>Precise remedies for harmony</li>
+                    </ul>
+                    <a href="#booking" class="cta-primary">Begin Compatibility Analysis →</a>
+                </div>
+            </div>
+
+            <div id="career" class="tab-content">
+                <div class="service-card">
+                    <h3>💼 Career &amp; Money Karma</h3>
+                    <p>"We reduce your time &amp; mistakes to achieve dreams at a bigger scale"</p>
+                    <ul>
+                        <li>Job timing and career windows</li>
+                        <li>Business guidance and entrepreneurship</li>
+                        <li>Career shift clarity and direction</li>
+                        <li>Wealth and investment through karmic lens</li>
+                        <li>Law of Attraction + Jyotish timing combined</li>
+                    </ul>
+                    <a href="#booking" class="cta-primary">Map My Career Windows →</a>
+                </div>
+            </div>
+
+            <div id="gemstones" class="tab-content">
+                <div class="service-card">
+                    <h3>💎 Vedic Remedies &amp; Gemstones</h3>
+                    <p>No selling pressure. Only truth and suitability guidance.</p>
+                    <ul>
+                        <li>Suitability first — only chart-justified gemstones</li>
+                        <li>Ethical guidance with simple alternatives</li>
+                        <li>Low cost or no cost options available</li>
+                        <li>Sure-shot results, not commercial pressure</li>
+                    </ul>
+                    <div class="quote">"Low cost or no cost remedies with sure-shot results"</div>
+                    <a href="#booking" class="cta-primary">Check My Gem Fit →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Remedies & Vastu -->
+    <section id="remedies">
+        <div class="section-header scroll-animate">
+            <h2>🌿 REMEDIES &amp; VASTU</h2>
+            <p>Remedies that respect your time, wallet, and dignity</p>
+        </div>
+
+        <div class="about-content">
+            <div class="service-card scroll-animate">
+                <h3>Lal Kitab Approach</h3>
+                <p>Simple, inexpensive, targeted to the actual affliction in your horoscope. These are not one-size-fits-all solutions, but deeply personalized corrections that work in harmony with your unique chart.</p>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>Vastu Methodology</h3>
+                <p>Directional corrections, subtle cures, behavioral anchoring — done like a luxury clinic protocol; not superstition. We bring energy balance without renovation chaos.</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#booking" class="cta-primary">Get My Personal Remedy Plan →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Session Feels -->
+    <section>
+        <div class="section-header scroll-animate">
+            <h2>🌙 HOW YOUR SESSION FEELS</h2>
+            <p>This is not a session. This is a spiritual reboot.</p>
+        </div>
+
+        <div class="why-cards">
+            <div class="why-card scroll-animate">
+                <h3>✨ Truths Revealed</h3>
+                <p>You will hear truths no one has told you. Insights that have been waiting for you to be ready.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>✨ Clarity Gained</h3>
+                <p>You will gain clarity that settles your mind and brings peace to your inner chaos.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>✨ Patterns Understood</h3>
+                <p>You will understand your patterns &amp; destiny cycles with crystal-clear awareness.</p>
+            </div>
+
+            <div class="why-card scroll-animate">
+                <h3>✨ Transformation Begins</h3>
+                <p>You will walk out lighter, stronger, aligned with your true path and purpose.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Journey -->
+    <section>
+        <div class="section-header scroll-animate">
+            <h2>🛤️ CLIENT JOURNEY</h2>
+            <p>What happens after you book your session</p>
+        </div>
+
+        <div class="about-content">
+            <div class="service-card scroll-animate">
+                <h3>After Booking</h3>
+                <p>You receive a sacred pre-session brief with 3 micro-rituals to prime clarity and prepare your energy field.</p>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>Session Day</h3>
+                <p>Arrive with calm breath; we read without asking you anything first — then validate together. Your truth is already written in the stars.</p>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>Your Remedy Map</h3>
+                <p>Clear, doable steps (often low/no cost) and a 90-day momentum plan to anchor your transformation.</p>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>The 11-Day Shift</h3>
+                <p>Small check-ins &amp; habit cues to anchor change. This is when the magic starts to manifest.</p>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>45-Day Review</h3>
+                <p>Optional follow-up to tune timelines and celebrate your evolution.</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#booking" class="cta-primary">Begin My Journey →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="section-header scroll-animate">
+            <h2>❤️ REAL EXPERIENCES</h2>
+            <p>Voices of transformation</p>
+        </div>
+
+        <div class="testimonials">
+            <div class="testimonial-card scroll-animate">
+                "I cried… not out of fear or shock — but relief &amp; clarity. This session changed my life's direction completely."
+            </div>
+
+            <div class="testimonial-card scroll-animate">
+                "Never seen astrology this logical. Every prediction came true with exact timelines. The remedies were so simple yet powerful."
+            </div>
+
+            <div class="testimonial-card scroll-animate">
+                "No rituals, no fear, no selling — pure truth. I felt understood for the first time in my life."
+            </div>
+
+            <div class="testimonial-card scroll-animate">
+                "I booked one session. I came for six. Tathastu became my spiritual GPS."
+            </div>
+
+            <div class="testimonial-card scroll-animate">
+                "The Lal Kitab remedies worked within days. My business turned around in just 3 weeks. Unbelievable but real."
+            </div>
+
+            <div class="testimonial-card scroll-animate">
+                "Vastu without breaking walls? Yes! Our home energy shifted completely. Peace and prosperity returned."
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section id="faqs">
+        <div class="section-header scroll-animate">
+            <h2>❓ FREQUENTLY ASKED QUESTIONS</h2>
+            <p>Clear answers for serious seekers</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item scroll-animate">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: Is this scientific or spiritual?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A: Both. We unite Jyotish analytics with practical psychology and proven remedial systems. Ancient wisdom meets modern understanding.</p>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: Are remedies expensive?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A: Mostly simple, low/no-cost — chosen for impact, not show. We believe transformation shouldn't depend on your wallet.</p>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: Is my privacy protected?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A: Completely. One client at a time — by design. Your deepest truths are sacred and remain confidential.</p>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: What if I'm skeptical?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A: Perfect. See how truth validates itself when timelines and events align. Skepticism keeps you grounded in reality.</p>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: How long are the sessions?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A: Signature Life Blueprint: 90-120 minutes. Focused tracks: 45-60 minutes. Vastu clearance: 45-55 minutes. Quality over speed.</p>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: Do you offer online sessions?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A: Yes, via video call. Distance doesn't diminish the connection. The cosmic field transcends physical location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aartis/Chalisa -->
+    <section id="aartis">
+        <div class="section-header scroll-animate">
+            <h2>🪷 AARTIS / CHALISA</h2>
+            <p>Calm the mind. Brighten the body. Open the channel.</p>
+        </div>
+
+        <div class="about-content">
+            <p class="scroll-animate">Curated Aarti/Chalisa collection to stabilize mind and receive guidance — because devotion refines perception.</p>
+            
+            <div class="why-cards" style="margin-top: 3rem;">
+                <div class="why-card scroll-animate">
+                    <h3>🙏 Morning Prayers</h3>
+                    <p>Start your day with divine blessings and cosmic alignment.</p>
+                </div>
+
+                <div class="why-card scroll-animate">
+                    <h3>🔔 Evening Aartis</h3>
+                    <p>Close your day with gratitude and peaceful surrender.</p>
+                </div>
+
+                <div class="why-card scroll-animate">
+                    <h3>📿 Powerful Chalisas</h3>
+                    <p>40-verse devotional hymns for specific planetary remedies.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#contact" class="cta-primary">Access Devotion Library →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking-section">
+        <div class="scarcity-badge">⏳ Few Premium Slots Weekly · Serious Seekers Only</div>
+        
+        <div class="section-header">
+            <h2>🔥 BOOK YOUR SESSION</h2>
+            <p>We only take limited sessions because your life deserves attention, not automation.</p>
+        </div>
+
+        <div class="about-content">
+            <div class="service-card scroll-animate">
+                <h3>Signature Life Blueprint</h3>
+                <p>90-120 minutes — deep decode, plan, remedies</p>
+                <a href="#contact" class="cta-primary">Book Now →</a>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>Focused Track Sessions</h3>
+                <p>45-60 minutes: Money | Relationships | Health | Career</p>
+                <a href="#contact" class="cta-primary">Choose Your Track →</a>
+            </div>
+
+            <div class="service-card scroll-animate">
+                <h3>Vastu Clearance</h3>
+                <p>45-55 minutes — single property/session</p>
+                <a href="#contact" class="cta-primary">Book Vastu Session →</a>
+            </div>
+
+            <p style="margin-top: 3rem; font-size: 1.2rem; color: var(--warm-amber);">
+                💡 Slots open for serious seekers only<br>
+                ⏳ Sessions fill weeks in advance
+            </p>
+
+            <p style="margin-top: 2rem; font-size: 1.3rem; font-weight: 600;">
+                If you feel the pull, it's your time.
+            </p>
+
+            <div style="margin-top: 3rem;">
+                <a href="#contact" class="cta-primary" style="font-size: 1.3rem; padding: 1.5rem 3.5rem;">Don't Wait — Reserve Now →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header scroll-animate">
+            <h2>📞 CONTACT</h2>
+            <p>Your soul brought you here. Now walk forward.</p>
+        </div>
+
+        <div class="about-content">
+            <div class="service-card scroll-animate">
+                <h3>Get In Touch</h3>
+                <p style="font-size: 1.2rem; margin: 2rem 0;">
+                    📧 Email: contact@tathastu.com<br>
+                    📱 WhatsApp: +91-XXXXX-XXXXX<br>
+                    📍 Location: [Your City, India]
+                </p>
+                <p style="margin-top: 2rem;">
+                    For booking inquiries, session details, or general guidance questions, reach out through your preferred channel. We respond within 24-48 hours.
+                </p>
+            </div>
+
+            <div class="quote scroll-animate" style="margin-top: 3rem;">
+                Tathastu — Let all your dreams come true. 🙏
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#why">Why Tathastu</a>
+            <a href="#services">Services</a>
+            <a href="#remedies">Remedies &amp; Vastu</a>
+            <a href="#about">About</a>
+            <a href="#testimonials">Results</a>
+            <a href="#faqs">FAQs</a>
+            <a href="#aartis">Aartis/Chalisa</a>
+            <a href="#booking">Book Session</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-cta">
+            <a href="#booking" class="cta-primary">Begin My Destiny Session</a>
+            <a href="#contact" class="cta-secondary">Request Consultation</a>
+        </div>
+
+        <div class="copyright">
+            © 2025 Tathastu. All rights reserved. | Serving for 20 years with devotion &amp; truth.
+        </div>
+    </footer>
+
+    <script>
+        // Generate cosmic background stars
+        function generateStars() {
+            const bg = document.getElementById('cosmic-bg');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                bg.appendChild(star);
+            }
+        }
+
+        // Mobile navigation toggle
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Tab functionality
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            const tabBtns = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove('active');
+            }
+
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // FAQ toggle
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const allFaqs = document.querySelectorAll('.faq-item');
+            
+            allFaqs.forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            faqItem.classList.toggle('active');
+        }
+
+        // Scroll animations
+        function checkScrollAnimations() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', function() {
+            generateStars();
+            checkScrollAnimations();
+        });
+
+        window.addEventListener('scroll', checkScrollAnimations);
+    </script>
+</body>
+</html>
